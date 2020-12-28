@@ -1,4 +1,4 @@
-//import express
+//express
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,10 +10,11 @@ conn
   .then(() => console.log("Connection to database was sucessful."))
   .catch((err) => console.log("Erorr: " + err));
 
-//import routes
-//import authentication routes
-const authRoutes = require("./routes/route-auth");
+//routes
+const authRoutes = require("./routes/route-auth"); //authentication routes
 
+//middleware
+app.use(express.json());
 app.use("/api/user", authRoutes);
 
 //listen on port
