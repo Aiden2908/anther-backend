@@ -6,6 +6,7 @@ module.exports = new Sequelize(
   config.development.username,
   config.development.password,
   {
+    logging: false,
     host: config.development.host,
     dialect: config.development.dialect,
 
