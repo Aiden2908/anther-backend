@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id            Int            @id @default(autoincrement())
+  name          String
+  email         String         @unique
+  password      String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  lastActiveAt  DateTime       @default(now())
+  users_details users_details?
+}
+
+model ethinicities {
+  id            Int             @id @default(autoincrement())
+  ethinicitiy   String?
+  popularity    Int?
+  users_details users_details[]
+}
+
+model professions {
+  id            Int             @id @default(autoincrement())
+  profession    String?
+  users_details users_details[]
+}
+
+model users_details {
+  id                 Int                               @unique
+  sex                users_details_sex?
+  dob                DateTime?
+  aim                users_details_aim?
+  sexual_orientation users_details_sexual_orientation?
+  relation_status    users_details_relation_status?
+  school             String?
+  education          users_details_education?
+  profession         Int?
+  hobbies            String?
+  drink_alcohol      users_details_drink_alcohol?
+  smoke              users_details_smoke?
+  height             Float?
+  show_height        Boolean?
+  ethinicitiy        Int?
+  kids               users_details_kids?
+  personal_statement String?
+  images             String?
+  ethinicities       ethinicities?                     @relation(fields: [ethinicitiy], references: [id])
+  users              users                             @relation(fields: [id], references: [id])
+  professions        professions?                      @relation(fields: [profession], references: [id])
+
+  @@index([ethinicitiy], name: "ethinicitiy")
+  @@index([profession], name: "profession")
+}
+
+enum users_details_sex {
+  I__m_a_man @map("I''m a man")
+  I__m_a_woman @map("I''m a woman")
+  Other
+}
+
+enum users_details_aim {
+  I__m_here_to_date @map("I''m here to date")
+  I__m_here_to_meet_new_people @map("I''m here to meet new people")
+  I__m_here_to_see_what_happens @map("I''m here to see what happens")
+}
+
+enum users_details_sexual_orientation {
+  Straight
+  Gay_Lesbian @map("Gay/Lesbian")
+  Bisexual
+  Asexual
+  Pansexual
+  Demisexual
+  Quetioning
+  Prefer_not_to_say @map("Prefer not to say")
+  Other
+}
+
+enum users_details_relation_status {
+  Single
+  Taken
+  Complicated
+  Prefer_not_to_say @map("Prefer not to say")
+}
+
+enum users_details_education {
+  High_school @map("High school")
+  Certificate
+  Bachelors
+  Masters
+  Doctorate
+  Prefer_not_to_say @map("Prefer not to say")
+}
+
+enum users_details_drink_alcohol {
+  Yes
+  No
+  Sometimes
+  Prefer_not_to_say @map("Prefer not to say")
+}
+
+enum users_details_smoke {
+  Yes
+  No
+  Sometimes
+  Prefer_not_to_say @map("Prefer not to say")
+}
+
+enum users_details_kids {
+  Want_them_someday @map("Want them someday")
+  Don__t_want_kids @map("Don''t want kids")
+  Already_Have_kids @map("Already Have kids")
+  Haven__t_decided_yet @map("Haven''t decided yet")
+  Prefer_not_to_say @map("Prefer not to say")
+}
