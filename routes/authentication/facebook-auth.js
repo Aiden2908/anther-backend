@@ -8,7 +8,7 @@ module.exports = (router, prisma, createAuthToken) => {
   const facebookOptions = {
     clientID: process.env.FB_APP_ID,
     clientSecret: process.env.FB_APP_SECRET,
-    callbackURL: "http://localhost:5000/api/user/auth/facebook/callback",
+    callbackURL: process.env.BASE_URL + "/api/auth/facebook/callback",
     profileFields: ["id", "displayName", "photos", "email"],
   };
 
@@ -21,7 +21,7 @@ module.exports = (router, prisma, createAuthToken) => {
   function callbackHandlerMiddleware(req, res, next) {
     //on facebook data recieved
     passport.authenticate("facebook", async function (user) {
-      if (user) {
+      if (user.id) {
         let { id, displayName, emails, photos } = user;
 
         //check if user already exists in databse

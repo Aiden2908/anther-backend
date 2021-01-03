@@ -1,5 +1,5 @@
 router = require("express").Router();
-const verify = require("../../middleware/jwt");
+const verify = require("../../../middleware/jwt");
 
 router.get("/", verify, (req, res) => {
   const data = {

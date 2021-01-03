@@ -3,8 +3,8 @@ const request = require("supertest"); //handles calling api
 
 const app = require("../../../app");
 
-const signup = require("../authentication/signup/_signup-tests");
-const signin = require("../authentication/signin/_signin-tests");
+const signup = require("../authentication/signup/signup-tests");
+const signin = require("../authentication/signin/signin-tests");
 
 signup(app, expect, request);
 signin(app, expect, request);

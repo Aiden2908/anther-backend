@@ -1,10 +1,10 @@
 module.exports = (app, expect, request) => {
-  it("OK, signin with invalid email", (done) => {
+  it("OK, signin with short password", (done) => {
     request(app)
-      .post("/api/user/auth/signin")
+      .post("/api/auth/signin")
       .send({
-        email: "testail.com",
-        password: "test1234",
+        email: "test@gmail.com",
+        password: "tes",
       })
       .then((res) => {
         const body = res.body;

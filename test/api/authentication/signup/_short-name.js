@@ -1,7 +1,7 @@
 module.exports = (app, expect, request) => {
   it("OK, signup with short name", (done) => {
     request(app)
-      .post("/api/user/auth/signup")
+      .post("/api/auth/signup")
       .send({
         email: "test@gmail.com",
         name: "ur",

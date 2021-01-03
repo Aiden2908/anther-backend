@@ -8,15 +8,13 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 //routes
-const appAuthRoute = require("./routes/authentication/app-auth"); //authentication routes
-const homeRoute = require("./routes/private/route-home");
+const authRoutes = require("./routes/authentication/app-auth"); //authentication routes
+const antherRoutes = require("./routes/private/anther");
 
 //middleware
 app.use(express.json());
-app.use("/api/user/auth", appAuthRoute);
-app.use("/api/anther", homeRoute);
-
-//databse connection
+app.use("/api/auth", authRoutes);
+app.use("/api/anther", antherRoutes);
 
 //listen on port
 app.listen(PORT, () => {
