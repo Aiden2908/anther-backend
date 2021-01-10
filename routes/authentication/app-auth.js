@@ -37,7 +37,8 @@ router.post("/signup", async (req, res) => {
         if (target === "email_unique")
           return res
             .status(406)
-            .json({ error: `${req.body.email} already in use.` });
+            .json({ error: `Sorry, ${req.body.email} is already in use.` });
+        console.log(error);
         return res.status(500).json({ error: "something went wrong" });
       }
     }

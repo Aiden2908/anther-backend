@@ -8,11 +8,13 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 //routes
+const pingRoute = require("./routes/ping");
 const authRoutes = require("./routes/authentication/app-auth"); //authentication routes
 const antherRoutes = require("./routes/private/anther");
 
 //middleware
 app.use(express.json());
+app.use("/api/ping", pingRoute);
 app.use("/api/auth", authRoutes);
 app.use("/api/anther", antherRoutes);
 
