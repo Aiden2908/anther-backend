@@ -3,6 +3,10 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+const PORT_CHAT = 3000;
+
 //.env
 const dotenv = require("dotenv");
 dotenv.config();
@@ -21,6 +25,15 @@ app.use("/api/anther", antherRoutes);
 //listen on port
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+//Chat
+io.on("connection", (socket) => {
+  console.log("a user has connected :)");
+});
+
+server.listen(PORT_CHAT, () => {
+  console.log(`Server(chat) is running on port ${PORT_CHAT}`);
 });
 
 module.exports = app;
