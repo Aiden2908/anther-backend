@@ -35,7 +35,10 @@ app.listen(PORT, () => {
 var server = require("http").createServer();
 var io = require("socket.io")(server);
 io.on("connection", function (client) {
-  client.on("event", function (data) {});
+  console.log("SERVER: this clinet joined:", client.id);
+  client.on("event", function (data) {
+    console.log(client.id, data);
+  });
   client.on("disconnect", function () {});
 });
 // server.listen(3000);
