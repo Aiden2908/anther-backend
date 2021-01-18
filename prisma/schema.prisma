@@ -58,6 +58,13 @@ model users_details {
   @@index([profession], name: "profession")
 }
 
+model interests {
+  id         Int     @id @default(autoincrement())
+  interest   String?
+  popularity Int?
+  color      String?
+}
+
 enum users_details_sex {
   I__m_a_man @map("I''m a man")
   I__m_a_woman @map("I''m a woman")

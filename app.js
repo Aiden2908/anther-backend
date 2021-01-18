@@ -47,4 +47,6 @@ server.listen(PORT_CHAT, () => {
   console.log(`Server(chat) is running on port ${PORT_CHAT}`);
 });
 
+// const test = require("./sql/data/populateInterestsTable");
+
 module.exports = app;
