@@ -6,7 +6,7 @@ const password = require("../validation/fields/password-field");
 const signupSchema = () =>
   Joi.object({
     email: email(Joi),
-    name: name(Joi),
+    // name: name(Joi),
     password: password(Joi),
   });
 

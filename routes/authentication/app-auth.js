@@ -24,12 +24,12 @@ router.post("/signup", async (req, res) => {
       let user = await prisma.users.create({
         data: {
           email: req.body.email,
-          name: req.body.name,
+          // name: req.body.name,
           password: hashedPassword,
         },
       });
-      let { id, email, name } = user;
-      return res.status(200).json({ id, email, name });
+      let { id, email } = user;
+      return res.status(200).json({ id, email });
     } catch (error) {
       //check if email is already in use
       if (error.meta) {
