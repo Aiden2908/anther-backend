@@ -1,35 +1,36 @@
+DROP TABLE users_details;
+
 CREATE TABLE users_details(
 	id INT(11) NOT NULL UNIQUE,
     
-    sex ENUM("I'm a man", "I'm a woman", "Other"),
+    display_name VARCHAR(12),
+    sex ENUM("M", "F"),
+    sexual_orientation ENUM("Straight", "Gay", "Lesbian", "Bisexual", "Asexual", "Transexual", "Pansexual", "Questioning", "Other"),
+    purpose ENUM("date", "chat_and_meet_new_people", "see_what_happens"),
+
     dob DATE,
 
-    aim ENUM("I'm here to date", "I'm here to meet new people", "I'm here to see what happens"),
-    sexual_orientation ENUM("Straight", "Gay/Lesbian", "Bisexual", "Asexual", "Pansexual", "Demisexual", "Quetioning", "Prefer not to say", "Other"),
-    relation_status ENUM("Single", "Taken", "Complicated", "Prefer not to say"),
-    
-    school VARCHAR(100),
-    education ENUM("High school", "Certificate", "Bachelors", "Masters", "Doctorate", "Prefer not to say"),
-    profession INT(4),
-    
-   	hobbies JSON,
-    
-    drink_alcohol ENUM("Yes", "No", "Sometimes", "Prefer not to say"),
-    smoke ENUM("Yes", "No", "Sometimes", "Prefer not to say"),
+    relation_status ENUM("Single", "Open", "Taken", "Complicated", "void"),
+   	interests JSON,
+
+    school_name VARCHAR(156),
+    school_major VARCHAR(156),
+    school_graduated BOOLEAN,
+
+    profession VARCHAR(156),
+    workplace_name VARCHAR(156),
+
+    drinking_habbit ENUM("A_drinker", "Not_a_drinker", "A_occasional_drinker", "void"),
+    smoking_habbit ENUM("A_smoker", "Not_a_smoker", "void"),
 
     height DECIMAL,
-    show_height BOOLEAN,
+    height_unit ENUM("cm", "ft"),
 
-    ethinicitiy TINYINT UNSIGNED,
+    about_you VARCHAR(255),
 
-    kids ENUM("Want them someday", "Don't want kids", "Already Have kids", "Haven't decided yet", "Prefer not to say"),
+    kids ENUM("Want_them_someday", "Don't_want_kids", "Already_have_kids", "Haven't_decided_yet", "void"),
 
-    personal_statement VARCHAR(500),
-
-
-    images JSON,
+    photos JSON,
     
-    FOREIGN KEY (ethinicitiy) REFERENCES ethinicities(id),
-    FOREIGN KEY (profession) REFERENCES professions(id),
-    FOREIGN KEY (id) REFERENCES users(id)
+    FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE
 );

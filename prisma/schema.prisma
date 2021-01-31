@@ -18,43 +18,39 @@ model users {
 }
 
 model ethinicities {
-  id            Int             @id @default(autoincrement())
-  ethinicitiy   String?
-  popularity    Int?
-  users_details users_details[]
+  id          Int     @id @default(autoincrement())
+  ethinicitiy String?
+  popularity  Int?
 }
 
 model professions {
-  id            Int             @id @default(autoincrement())
-  profession    String?
-  users_details users_details[]
+  id         Int     @id @default(autoincrement())
+  profession String?
 }
 
 model users_details {
   id                 Int                               @unique
+  display_name       String?
   sex                users_details_sex?
-  dob                DateTime?
-  aim                users_details_aim?
   sexual_orientation users_details_sexual_orientation?
+  purpose            users_details_purpose?
+  dob                DateTime?
   relation_status    users_details_relation_status?
-  school             String?
-  education          users_details_education?
-  profession         Int?
-  hobbies            String?
-  drink_alcohol      users_details_drink_alcohol?
-  smoke              users_details_smoke?
+  interests          String?
+  school_name        String?
+  school_major       String?
+  school_graduated   Boolean?
+  profession         String?
+  workplace_name     String?
+  drinking_habbit    users_details_drinking_habbit?
+  smoking_habbit     users_details_smoking_habbit?
   height             Float?
-  show_height        Boolean?
-  ethinicitiy        Int?
+  height_unit        users_details_height_unit?
+  about_you          String?
   kids               users_details_kids?
-  personal_statement String?
-  images             String?
-  ethinicities       ethinicities?                     @relation(fields: [ethinicitiy], references: [id])
+  photos             String?                           @default("{\"profile\": null,\"maxPhotos\": 8,\"photoArray\": []}")
+  completion         Boolean?
   users              users                             @relation(fields: [id], references: [id])
-  professions        professions?                      @relation(fields: [profession], references: [id])
-
-  @@index([ethinicitiy], name: "ethinicitiy")
-  @@index([profession], name: "profession")
 }
 
 model interests {
@@ -65,63 +61,58 @@ model interests {
 }
 
 enum users_details_sex {
-  I__m_a_man @map("I''m a man")
-  I__m_a_woman @map("I''m a woman")
-  Other
-}
-
-enum users_details_aim {
-  I__m_here_to_date @map("I''m here to date")
-  I__m_here_to_meet_new_people @map("I''m here to meet new people")
-  I__m_here_to_see_what_happens @map("I''m here to see what happens")
+  M
+  F
 }
 
 enum users_details_sexual_orientation {
   Straight
-  Gay_Lesbian @map("Gay/Lesbian")
+  Gay
+  Lesbian
   Bisexual
   Asexual
+  Transexual
   Pansexual
-  Demisexual
-  Quetioning
-  Prefer_not_to_say @map("Prefer not to say")
+  Questioning
   Other
 }
 
 enum users_details_relation_status {
   Single
+  Open
   Taken
   Complicated
-  Prefer_not_to_say @map("Prefer not to say")
-}
-
-enum users_details_education {
-  High_school @map("High school")
-  Certificate
-  Bachelors
-  Masters
-  Doctorate
-  Prefer_not_to_say @map("Prefer not to say")
-}
-
-enum users_details_drink_alcohol {
-  Yes
-  No
-  Sometimes
-  Prefer_not_to_say @map("Prefer not to say")
-}
-
-enum users_details_smoke {
-  Yes
-  No
-  Sometimes
-  Prefer_not_to_say @map("Prefer not to say")
+  void
 }
 
 enum users_details_kids {
-  Want_them_someday @map("Want them someday")
-  Don__t_want_kids @map("Don''t want kids")
-  Already_Have_kids @map("Already Have kids")
-  Haven__t_decided_yet @map("Haven''t decided yet")
-  Prefer_not_to_say @map("Prefer not to say")
+  Want_them_someday
+  Don__t_want_kids @map("Don''t_want_kids")
+  Already_have_kids
+  Haven__t_decided_yet @map("Haven''t_decided_yet")
+  void
+}
+
+enum users_details_purpose {
+  date
+  chat_and_meet_new_people
+  see_what_happens
+}
+
+enum users_details_drinking_habbit {
+  A_drinker
+  Not_a_drinker
+  A_occasional_drinker
+  void
+}
+
+enum users_details_smoking_habbit {
+  A_smoker
+  Not_a_smoker
+  void
+}
+
+enum users_details_height_unit {
+  cm
+  ft
 }

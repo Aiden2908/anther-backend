@@ -29,7 +29,17 @@ router.post("/signup", async (req, res) => {
         },
       });
       let { id, email } = user;
-      return res.status(200).json({ id, email });
+      //Create new details row
+      const details = await prisma.users_details.create({
+        data: {
+          users: {
+            connect: {
+              id: parseInt(id),
+            },
+          },
+        },
+      });
+      return res.status(200).json({ id, email, details });
     } catch (error) {
       //check if email is already in use
       if (error.meta) {

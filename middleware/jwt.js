@@ -8,9 +8,9 @@ module.exports = function auth(req, res, next) {
   if (!token) return res.status(401).send("access denied");
 
   try {
-    const vefied = jwt.verify(token, process.env.TOKEN_SECRET);
+    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
     //add token obj, ie user id into req
-    req.user = vefied;
+    req.user = verified;
 
     //update user last activity time
     async (id) => {
